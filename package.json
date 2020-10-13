@@ -1,0 +1,39 @@
+{
+  "name": "tft-match-history",
+  "version": "1.0.0",
+  "description": "A nodeJS application that provides TFT match history for summoners",
+  "main": "index.js",
+  "engines": {
+    "node": "12.18.2"
+  },
+  "scripts": {
+    "test": "test",
+    "start": "node ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BlARCHER31/tft-match-history.git"
+  },
+  "keywords": [
+    "nodejs",
+    "tft"
+  ],
+  "author": "blake archer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BlARCHER31/tft-match-history/issues"
+  },
+  "homepage": "https://github.com/BlARCHER31/tft-match-history#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-async-errors": "^3.1.1",
+    "loglevel": "^1.6.8"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.10.4",
+    "@babel/core": "^7.10.4",
+    "@babel/preset-env": "^7.10.4",
+    "@babel/register": "^7.10.4",
+    "nodemon": "^2.0.4"
+  }
+}
