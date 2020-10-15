@@ -3,12 +3,8 @@ import express from 'express'
 function getTestRoutes() {
   const router = express.Router()
   router.get('/hello', handleHelloRequest)
+  router.get('/goodbye', handleGoodbyeRequest)
   return router
-}
-function getGoodbye(){
-    const router = express.Router()
-    router.get('/goodbye', handleGoodbyeRequest)
-    return router
 }
 
 async function handleHelloRequest(req, res) {
@@ -20,4 +16,3 @@ async function handleGoodbyeRequest(req, res) {
 }
 
 export {getTestRoutes}
-export {getGoodbye}

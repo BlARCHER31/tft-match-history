@@ -2,13 +2,11 @@ import express from 'express'
 import 'express-async-errors'
 import logger from 'loglevel'
 import {getRoutes} from './routes'
-import {getRoutesTwo} from './routes'
 
 function startServer({port = process.env.PORT} = {}) {
   const app = express()
 
   app.use('/api', getRoutes())
-  app.use('/api', getRoutesTwo())
 
   app.use(errorMiddleware)
 
