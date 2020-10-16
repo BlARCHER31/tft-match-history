@@ -7,7 +7,7 @@ function getTFTRoutes(){
 }
 
 async function getSummonerHandler(req, res){
-    res.json({"message": req.params.summonerName})
+    res.send("Welcome " + req.params.summonerName + "!!")
 }
 
 export {getTFTRoutes}
