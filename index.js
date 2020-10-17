@@ -3,3 +3,4 @@ if (process.env.NODE_ENV === 'production') {
   } else {
     require('nodemon')({script: 'dev.js'})
   }
+
