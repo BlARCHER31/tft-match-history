@@ -2,6 +2,7 @@ import express from 'express'
 import 'express-async-errors'
 import logger from 'loglevel'
 import {getRoutes} from './routes'
+import config from 'config'
 
 function startServer({port = process.env.PORT} = {}) {
   const app = express()
@@ -11,7 +12,7 @@ function startServer({port = process.env.PORT} = {}) {
   app.use(errorMiddleware)
 
   return new Promise((resolve) => {
-    const server = app.listen(port, () => {
+    const server = app.listen(config.get('app.server.port'), () => {
       logger.info(`Listening on port ${server.address().port}`)
       const originalClose = server.close.bind(server)
       server.close = () => {
