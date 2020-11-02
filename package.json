@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/BlARCHER31/tft-match-history#readme",
   "dependencies": {
+    "axios": "^0.20.0",
     "config": "^3.3.2",
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",

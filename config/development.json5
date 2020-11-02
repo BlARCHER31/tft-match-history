@@ -1,7 +1,11 @@
 {
-    app: {
+        app: {
         server: {
             port: 8080
         }
+    },
+    riot: {
+        apiKey: 'RGAPI-cdf32914-2001-4e9e-b8c2-088373405911',
+        baseURL: 'https://na1.api.riotgames.com',
     }
 }
