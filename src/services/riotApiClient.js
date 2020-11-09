@@ -10,9 +10,9 @@ class RiotApiClient {
       try {
         response = await axios.get(url,
             {
-              baseURL: `${config.get('riot.baseURL')}`,
+              baseURL: config.get('riot.baseURL'),
               headers: {
-                'X-Riot-Token': `${config.get('riot.apiKey')}`
+                'X-Riot-Token': config.get('riot.apiKey')
               }
             }
         )
@@ -22,7 +22,21 @@ class RiotApiClient {
         throw err
       }
     }
-  }
+    
+    async getLoLPatchVersions(req, res) {
+      let response;
+      try {
+      response = await axios.get('https://ddragon.leagueoflegends.com/api/versions.json')
+      } catch (e) {
+          return res.status(500).send(`Unable to fetch Json: ${e.message}`)
+      }
+      const version = response.data;
+      return version[0];
+  
+   }
+}
+
+
 
         
     
