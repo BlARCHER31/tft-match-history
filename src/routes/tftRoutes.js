@@ -36,7 +36,14 @@ async function getRecentMatchInfo(req, res) {
 
         const matchInfo = await riotApiClient.getMatchData(matchList[0])
         
-        res.send(matchInfo)
+        //res.send(matchInfo)
+        for(const i in matchInfo.info.participants[]){
+            if(matchInfo.info.participants.puuid[i] === puuid){
+                console.log(matchInfo.info.participants)
+            } else {
+                console.log(`This is not the summoner you're looking for.`)
+            }
+        }
     } catch (e) {
         return res.status(500).send(`Unable to fetch summoner Match Data for  ${summonerName}: ${e.message}`)
         }
