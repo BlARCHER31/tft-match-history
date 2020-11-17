@@ -37,7 +37,7 @@ async function getRecentMatchInfo(req, res) {
         const matchInfo = await riotApiClient.getMatchData(matchList[0])
         
         //res.send(matchInfo)
-        for(const i in matchInfo.info.participants[]){
+        for(const i in matchInfo.info.participants){
             if(matchInfo.info.participants.puuid[i] === puuid){
                 console.log(matchInfo.info.participants)
             } else {
