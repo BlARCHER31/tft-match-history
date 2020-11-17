@@ -36,14 +36,25 @@ async function getRecentMatchInfo(req, res) {
 
         const matchInfo = await riotApiClient.getMatchData(matchList[0])
         
-        //res.send(matchInfo)
-        for(const match in matchInfo){
-            for(const participant in matchInfo.info.participants){
-                if(participant.puuid === puuid) {
-                    res.send(participant.total_damage_to_players)
-                }
-            } 
+        
+        //res.send(matchInfo.info.participants)
+        let i;
+        for(i = 0; i < matchInfo.info.participants.length; i++){
+            if(matchInfo.info.participants[i].puuid === puuid){
+                let finalPosition = matchInfo.info.participants[i].placement
+                let totalDamage = matchInfo.info.participants[i].total_damage_to_players
+                let totalElims = matchInfo.info.participants[i].players_eliminated 
+                
+                res.send(`Hello ${summonerName}, in the most recent match here is how you did.
+                Total Eliminations: ${totalElims}
+                Total Damage to Other Players: ${totalDamage}
+                Final Place: ${finalPosition}`)
+                {break;}                  }
         }
+        
+        
+         
+    
     } catch (e) {
         return res.status(500).send(`Unable to fetch summoner Match Data for  ${summonerName}: ${e.message}`)
         }
