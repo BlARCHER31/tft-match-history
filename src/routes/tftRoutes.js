@@ -5,7 +5,8 @@ import riotApiClient from '../services/riotApiClient'
 function getTFTRoutes(){
     const router = express.Router()
     router.get('/v1/summoner/:summonerName', getSummonerHandler)
-    router.get('/v1/match/:summonerName/:count', getRecentMatchInfo)
+    router.get('/v1/match/:count/:summonerName', getRecentMatchInfo)
+    router.get('/v1/match-list/:count/:summonerName', getAllMatchInfo)
     //router.get('/v1/matchInfo/:summonerName', getMatchInfo)
     return router
 }
@@ -60,16 +61,23 @@ async function getRecentMatchInfo(req, res) {
         }
 }
 
-/*async function getMatchInfo(req, res) {
-    const summonerName = req.params.summonerName;
+async function getAllMatchInfo(req, res) {
+    const summonerName = req.params.summonerName
+    const count = req.params.count
     try {
-        getRecentMatchList(req, res){
-
-        }
+        const summonerInfo = await riotApiClient.fetchTFTSummonerInfo(summonerName);
+        const puuid = summonerInfo.puuid
+        const matchIds = await riotApiClient.getRecentMatches(puuid, count)
+        const matchListInfo = []
+        let i;
+        for(i = 0; i < matchIds.length; i++){
+             matchListInfo.push( await riotApiClient.getMatchData(matchIds[i]))
+             
+        } res.send(matchListInfo)
     } catch (e) {
-        return res.status(500).send(`Unable to feth the Specific Match Information ${summonerName}: ${e.message}`)
+        return res.status(500).send(`Unable to fetch the Specific Match Information ${summonerName}: ${e.message}`)
     }
-}*/
+}
 
 
 export {getTFTRoutes}
