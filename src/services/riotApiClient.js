@@ -75,6 +75,16 @@ class RiotApiClient {
       throw err
     }
   }
+  async fetchTFTMatchHistory(puuid, count){
+    
+    const matchIds = await this.getRecentMatches(puuid, count)
+    const matchListInfo = []
+        let i;
+        for(i = 0; i < matchIds.length; i++){
+             matchListInfo.push( await this.getMatchData(matchIds[i]))
+        } 
+        return matchListInfo
+  }
 }
 
 

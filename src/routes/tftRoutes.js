@@ -5,9 +5,9 @@ import riotApiClient from '../services/riotApiClient'
 function getTFTRoutes(){
     const router = express.Router()
     router.get('/v1/summoner/:summonerName', getSummonerHandler)
-    router.get('/v1/match/:count/:summonerName', getRecentMatchInfo)
-    router.get('/v1/match-list/:count/:summonerName', getAllMatchInfo)
-    //router.get('/v1/matchInfo/:summonerName', getMatchInfo)
+    router.get('/v1/match/:summonerName', getRecentMatchInfo)
+    router.get('/v1/match/history/:summonerName', getMatchHistoryForSummoner)
+    //router.get('/v1/stats/:count/:summonerName', getAverageScores)
     return router
 }
 
@@ -29,11 +29,11 @@ async function getSummonerHandler(req, res){
 // This handler gets the recent matches JSON using two functions from the riotApiClient
 async function getRecentMatchInfo(req, res) {
     const summonerName = req.params.summonerName;
-    const count = req.params.count
+    
     try {
         const summonerInfo = await riotApiClient.fetchTFTSummonerInfo(summonerName);
         const puuid = summonerInfo.puuid
-        const matchList = await riotApiClient.getRecentMatches(puuid, count)
+        const matchList = await riotApiClient.getRecentMatches(puuid, req.query.count)
 
         const matchInfo = await riotApiClient.getMatchData(matchList[0])
         
@@ -61,23 +61,27 @@ async function getRecentMatchInfo(req, res) {
         }
 }
 
-async function getAllMatchInfo(req, res) {
+async function getMatchHistoryForSummoner(req, res) {
     const summonerName = req.params.summonerName
-    const count = req.params.count
+    const count = req.query.count
+
     try {
         const summonerInfo = await riotApiClient.fetchTFTSummonerInfo(summonerName);
-        const puuid = summonerInfo.puuid
-        const matchIds = await riotApiClient.getRecentMatches(puuid, count)
-        const matchListInfo = []
-        let i;
-        for(i = 0; i < matchIds.length; i++){
-             matchListInfo.push( await riotApiClient.getMatchData(matchIds[i]))
-             
-        } res.send(matchListInfo)
+        let puuid = summonerInfo.puuid
+        
+        const matches = await riotApiClient.fetchTFTMatchHistory(puuid, count)
+        const response = { summoner: summonerInfo, matches: matches }
+        res.json(response)
+        
     } catch (e) {
         return res.status(500).send(`Unable to fetch the Specific Match Information ${summonerName}: ${e.message}`)
     }
 }
+
+/*async function getAverageScores(req, res){
+    
+        
+}*/
 
 
 export {getTFTRoutes}
