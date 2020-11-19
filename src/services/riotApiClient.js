@@ -82,7 +82,8 @@ class RiotApiClient {
         let i;
         for(i = 0; i < matchIds.length; i++){
              matchListInfo.push( await this.getMatchData(matchIds[i]))
-        } return matchListInfo
+        } 
+        return matchListInfo
   }
 }
 
