@@ -5,7 +5,7 @@
         }
     },
     riot: {
-        apiKey: 'RGAPI-b87dfc55-bd19-4e1a-9394-1ad1078026ba',
+        apiKey: 'RGAPI-bdfe94a1-5a7a-4e6f-9d76-d864aa59a8fb',
         baseURL: 'https://na1.api.riotgames.com',
         matchURL: 'https://americas.api.riotgames.com'
     }
