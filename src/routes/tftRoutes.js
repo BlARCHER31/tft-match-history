@@ -5,26 +5,61 @@ import riotApiClient from '../services/riotApiClient'
 function getTFTRoutes(){
     const router = express.Router()
     router.get('/v1/summoner/:summonerName', getSummonerHandler)
-    router.get('/v1/match/:summonerName', getRecentMatchInfo)
-    router.get('/v1/match/history/:summonerName', getMatchHistoryForSummoner)
-    //router.get('/v1/stats/:count/:summonerName', getAverageScores)
+    router.get('/v1/match/history/:summonerName/:matchId', getMatchInfo)
+    router.get('/v1/matchId/list/:summonerName', getListOfMatchIds)
     return router
 }
 
-// This handler retrieves the summoner info using the fetchTFTSummonerInfo function
+/**
+ * @swagger
+*   /v1/summoner/{summonerName}:
+*     get:
+*       description: Use to get the information about a summoner from their summoner name.
+*       responses:
+*         '200':
+*         description: A successful response.
+ */
 async function getSummonerHandler(req, res){
-    const summonerName = req.params.summonerName;
+    const summonerName = req.params.summonerName
+    
     try{
-        const iconIdURL = await riotApiClient.getLoLPatchVersions();
-        const summonerInfo = await riotApiClient.fetchTFTSummonerInfo(summonerName);
-        const iconID = summonerInfo.profileIconId
+        const summonerInfo = await riotApiClient.fetchTFTSummonerInfo(summonerName)
 
-        summonerInfo['profileIconId'] = `http://ddragon.leagueoflegends.com/cdn/${iconIdURL}/img/profileicon/${iconID}.png`;
         res.send(summonerInfo)
     } catch (e) {
-      return res.status(500).send(`Unable to fetch summoner ${summonerName}: ${e.message}`)
+      return res.status(500)
+      .send(`Unable to fetch summoner ${summonerName}: ${e.message}`)
       }
 }
+
+
+async function getMatchInfo(req, res) {
+    const summonerName = req.params.summonerName
+    const matchId = req.params.matchId
+    const summonerInfo = await riotApiClient.fetchTFTSummonerInfo(summonerName)
+    try {
+        const matchInfo = await riotApiClient.getMatchData(matchId) 
+        const match = {summoner: summonerInfo, matchInfo: matchInfo}
+        
+       res.json(match)   
+    } catch (e) {
+        return res.status(500).send(`Unable to fetch match info for the match: ${matchId}: ${e.message}`)
+    }
+}
+
+async function getListOfMatchIds(req, res){
+    const summonerName = req.params.summonerName
+    try{
+        const summonerInfo = await riotApiClient.fetchTFTSummonerInfo(summonerName)
+        const puuid = summonerInfo.puuid
+        
+        const matchList = await riotApiClient.getRecentMatchesList(puuid, req.query.count)
+        res.json(matchList) 
+    } catch (e) { 
+        return res.status(500).send(`Unable to fetch summoner Match List Data for  ${summonerName}: ${e.message}`)
+    }
+}
+
 // This handler gets the recent matches JSON using two functions from the riotApiClient
 async function getRecentMatchInfo(req, res) {
     const summonerName = req.params.summonerName;
@@ -32,7 +67,7 @@ async function getRecentMatchInfo(req, res) {
     try {
         const summonerInfo = await riotApiClient.fetchTFTSummonerInfo(summonerName);
         const puuid = summonerInfo.puuid
-        const matchList = await riotApiClient.getRecentMatches(puuid, req.query.count)
+        
 
         const matchInfo = await riotApiClient.getMatchData(matchList[0])
 
@@ -83,10 +118,6 @@ async function getMatchHistoryForSummoner(req, res) {
     }
 }
 
-/*async function getAverageScores(req, res){
-    
-        
-}*/
 
 
 export {getTFTRoutes}
