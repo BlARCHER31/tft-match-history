@@ -10,15 +10,7 @@ function getTFTRoutes(){
     return router
 }
 
-/**
- * @swagger
-*   "/v1/summoner/{summonerName}":
-*     "get":
-*       "description": "Use to get the information about a summoner from their summoner name.",
-*       "responses":
-*         "200":
-*           "description": "A successful response."
- */
+
 async function handleGetSummonerInfo(req, res){
     const summonerName = req.params.summonerName
     
