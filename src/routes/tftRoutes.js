@@ -4,22 +4,22 @@ import riotApiClient from '../services/riotApiClient'
 
 function getTFTRoutes(){
     const router = express.Router()
-    router.get('/v1/summoner/:summonerName', getSummonerHandler)
-    router.get('/v1/match/history/:summonerName/:matchId', getMatchInfo)
-    router.get('/v1/matchId/list/:summonerName', getListOfMatchIds)
+    router.get('/v1/summoner/:summonerName', handleGetSummonerInfo)
+    router.get('/v1/match/history/:matchId', handleGetMatchDetail)
+    router.get('/v1/matches/:summonerName', handleGetMatchesForSummoner)
     return router
 }
 
 /**
  * @swagger
-*   /v1/summoner/{summonerName}:
-*     get:
-*       description: Use to get the information about a summoner from their summoner name.
-*       responses:
-*         '200':
-*         description: A successful response.
+*   "/v1/summoner/{summonerName}":
+*     "get":
+*       "description": "Use to get the information about a summoner from their summoner name.",
+*       "responses":
+*         "200":
+*           "description": "A successful response."
  */
-async function getSummonerHandler(req, res){
+async function handleGetSummonerInfo(req, res){
     const summonerName = req.params.summonerName
     
     try{
@@ -33,13 +33,11 @@ async function getSummonerHandler(req, res){
 }
 
 
-async function getMatchInfo(req, res) {
-    const summonerName = req.params.summonerName
+async function handleGetMatchDetail(req, res) {
     const matchId = req.params.matchId
-    const summonerInfo = await riotApiClient.fetchTFTSummonerInfo(summonerName)
     try {
         const matchInfo = await riotApiClient.getMatchData(matchId) 
-        const match = {summoner: summonerInfo, matchInfo: matchInfo}
+        const match = {matchInfo: matchInfo}
         
        res.json(match)   
     } catch (e) {
@@ -47,7 +45,7 @@ async function getMatchInfo(req, res) {
     }
 }
 
-async function getListOfMatchIds(req, res){
+async function handleGetMatchesForSummoner(req, res){
     const summonerName = req.params.summonerName
     try{
         const summonerInfo = await riotApiClient.fetchTFTSummonerInfo(summonerName)

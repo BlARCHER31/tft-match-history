@@ -3,29 +3,15 @@ import 'express-async-errors'
 import logger from 'loglevel'
 import {getRoutes} from './routes'
 import config from 'config'
-const  swaggerJSDoc = require('swagger-jsdoc')
-const swaggerUi = require('swagger-ui-express')
+
 
 
 function startServer({port = process.env.PORT} = {}) {
   const app = express()
 
-  const swaggerOptions = {
-    swaggerDefinition: {
-    info: {
-        title: 'TFT API',
-        version: '1.0.0',
-        description: 'TeamFightTactics gameplay Information',
-        contact: {
-        name: 'Blake Archer',
-        email: 'blarcher31@gmail.com'
-        },
-        server: ['http://localhost:8080']
-    }
-    },
-    apis: ['start.js']
-}
-const swaggerDocs = swaggerJSDoc(swaggerOptions)
+const swaggerUi = require('swagger-ui-express')
+const swaggerDocs = require('../swagger.json')
+
 app.use('/api/tft/v1/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
   
 

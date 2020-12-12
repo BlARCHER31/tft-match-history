@@ -145,7 +145,7 @@ class RiotApiClient {
   }
   
   async correctMatchTransformation(matchInfo) {
-    const relevantMatchInfo = await Promise.all(matchInfo.info.participants.map( async info => {
+    return await Promise.all(matchInfo.info.participants.map( async info => {
       return {
         summoner: await this.fetchTFTSummonerInfoByPuuid(info.puuid),
         placement: info.placement,
@@ -174,7 +174,6 @@ class RiotApiClient {
 
       }
     }))
-    return relevantMatchInfo
   }
 }
 
