@@ -4,8 +4,16 @@ import logger from 'loglevel'
 import {getRoutes} from './routes'
 import config from 'config'
 
+
+
 function startServer({port = process.env.PORT} = {}) {
   const app = express()
+
+const swaggerUi = require('swagger-ui-express')
+const swaggerDocs = require('../swagger.json')
+
+app.use('/api/tft/v1/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
+  
 
   app.use('/api', getRoutes())
 
