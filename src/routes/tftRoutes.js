@@ -110,4 +110,4 @@ async function getMatchHistoryForSummoner(req, res) {
 
 
 
-export {getTFTRoutes}
+export {getTFTRoutes, handleGetSummonerInfo}

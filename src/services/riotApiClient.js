@@ -168,9 +168,6 @@ class RiotApiClient {
             })*/
           }
         }),
-          
-          /*imgUrl:.
-        }*/
 
       }
     }))
