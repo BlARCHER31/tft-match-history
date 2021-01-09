@@ -28,15 +28,6 @@ describe('When fetching summoner info using Axios, the Riot APi Client', () => {
         
         response = await mockAxios.get.mockResolvedValue(mockResponse)
         
-        riotApiClient.transformSummonerInfo.mockImplementation(() => {
-            return {
-                summonerName: summonerInfo.name,
-                level: summonerInfo.summonerLevel, 
-                profileIconUrl: url,
-                puuid: summonerInfo.puuid
-              }
-        })
-        
         
 
     })
