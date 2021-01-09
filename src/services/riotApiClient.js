@@ -130,7 +130,6 @@ class RiotApiClient {
       matchLength: matchInfo.info.game_length,
       matchParticipants: summoners
       }
-    return newMatchInfo
   }
   
   transformSummonerInfo(summonerInfo) {
