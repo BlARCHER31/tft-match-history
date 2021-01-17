@@ -92,7 +92,7 @@ describe('When fetching a match list from the riotApiClient, the tft route handl
     
     test('Fetches a match list from the API client', async () => {
       const puuid = 12345
-      mockRiotApiClient.fetchTFTSummonerInfo.mockImplementation(() => Promise.resolve({puuid: puuid}))
+      mockRiotApiClient.fetchTFTSummonerInfo.mockResolvedValue({puuid: puuid})
       req.query.count = 2
       
 
