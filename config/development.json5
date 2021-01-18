@@ -1,5 +1,5 @@
 {
-        app: {
+    app: {
         server: {
             port: 8080
         }
