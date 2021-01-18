@@ -1,7 +1,6 @@
 import logger from 'loglevel' 
 import config from 'config'
 import axios from 'axios'
-import {response} from 'express';
 
 
 class RiotApiClient {
