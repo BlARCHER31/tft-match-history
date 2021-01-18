@@ -8,7 +8,8 @@
   },
   "scripts": {
     "test": "jest --coverage",
-    "start": "node ."
+    "start": "node .",
+    "lint": "./node_modules/.bin/eslint ../tft-match-history"
   },
   "repository": {
     "type": "git",
