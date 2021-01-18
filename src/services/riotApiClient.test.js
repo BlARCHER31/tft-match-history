@@ -11,7 +11,7 @@ describe('When fetching summoner info using summonerName, the Riot APi Client',(
         riotApiClient.latestLolPatchVersion = 1
       })
 
-    test('The transform summoner info function reduces an object and returns a new one.', async () => {
+    test('When fetching summoner info using summoner name, the Riot API Client should return a valid summoner info response.', async () => {
         riotApiClient.latestLolPatchVersion = 1
         
         const mockedResponse = { data: {
@@ -35,7 +35,7 @@ describe('When fetching summoner info using summonerName, the Riot APi Client',(
 
     })
 
-    test("The get request is using the baseURL from the config.", async () => {
+    test("The get request is using the correct URL.", async () => {
         const summonerName = 'Blarcher'
         
         await riotApiClient.fetchTFTSummonerInfo(summonerName)
@@ -51,7 +51,7 @@ describe('When fetching summoner info using summonerName, the Riot APi Client',(
         expect(options.headers['X-Riot-Token']).toMatch(config.riot.apiKey)
     })
 
-    test('RiotApiClient throws an error', async () => {
+    test('RiotApiClient throws an error when the GET request fails.', async () => {
         mockAxios.get.mockImplementation(() => {throw new Error('Api Key Out of date.')})
         const summonerName = 'Blarcher'
         
@@ -68,7 +68,7 @@ describe('When fetching summoner info using puuid, the Riot APi Client', () => {
       })
 
 
-    test('The transform summoner info function reduces an object and returns a new one.', async () => {
+    test('When fetching summoner info using summoner name, the Riot API Client should return a valid summoner info response.', async () => {
         riotApiClient.latestLolPatchVersion = 1
         
         const mockedResponse = { data: {
@@ -92,7 +92,7 @@ describe('When fetching summoner info using puuid, the Riot APi Client', () => {
 
     })
 
-    test("The get request is using the baseURL from the config.", async () => {
+    test("The get request is using the correct URL.", async () => {
         const puuid = 12345
         
         await riotApiClient.fetchTFTSummonerInfoByPuuid(puuid)
@@ -108,7 +108,7 @@ describe('When fetching summoner info using puuid, the Riot APi Client', () => {
         expect(options.headers['X-Riot-Token']).toMatch(config.riot.apiKey)
     })
 
-    test('RiotApiClient throws an error', async () => {
+    test('RiotApiClient throws an error when the GET request fails.', async () => {
         mockAxios.get.mockImplementation(() => {throw new Error('Api Key Out of date.')})
         const puuid = 12345
         
@@ -133,7 +133,7 @@ describe('Fetching the latest patch version', () => {
 
     })
 
-    test('Riot API Client throws an error', async () => {
+    test('Riot API Client throws an error when the GET request fails.', async () => {
         
         mockAxios.get.mockImplementation(() => {throw new Error('Internal Server Issue')})
 
@@ -179,7 +179,7 @@ describe(`Getting a specific number of match Id's, The riot api client`, () => {
         expect(options.headers['X-Riot-Token']).toMatch(config.riot.apiKey)
     })
 
-    test('RiotApiClient throws an error', async () => {
+    test('RiotApiClient throws an error when the GET request fails.', async () => {
         mockAxios.get.mockImplementation(() => {throw new Error('Api Key Out of date.')})
         const puuid = 12345
         const count = 3
@@ -234,14 +234,14 @@ describe('Getting a specific matches info, the Riot Api Client', () => {
         expect(options.headers['X-Riot-Token']).toMatch(config.riot.apiKey)
     })
 
-    test('The match base url is being sent', async () => {
+    test('The correct URL is being used.', async () => {
         const matchId = 1
         await riotApiClient.getMatchData(matchId)
         const options = mockAxios.get.mock.calls[0][1]
         expect(options.baseURL).toMatch(config.riot.matchURL)
     })
 
-    test('The Riot Api Client throws an error', async () => {
+    test('The Riot Api Client throws an error when the GET request fails.', async () => {
         const matchId = 1
         mockAxios.get.mockImplementation(() => {throw new Error('Api Key Out of date.')})
 

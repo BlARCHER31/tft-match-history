@@ -101,7 +101,7 @@ describe('When fetching a match list from the riotApiClient, the tft route handl
       
       })
 
-    test('Sends an error to the caller', async () => {
+    test('Sends an error to the caller when the riotApiClient caLL fails.', async () => {
       mockRiotApiClient.fetchTFTSummonerInfo.mockImplementation(() => {throw new Error('Summoner not found.')})
       req.params.summonerName = "Blarcher"
 
