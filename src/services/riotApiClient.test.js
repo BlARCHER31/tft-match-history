@@ -156,7 +156,7 @@ describe(`Getting a specific number of match Id's, The riot api client`, () => {
         
         mockAxios.get.mockResolvedValue(mockedResponse)
                 
-        const result = await riotApiClient.getRecentMatchesList(puuid, count)
+        await riotApiClient.getRecentMatchesList(puuid, count)
         expect(puuidURL).toEqual(`/tft/match/v1/matches/by-puuid/12345/ids?count=3`)
 
     })
