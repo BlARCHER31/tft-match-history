@@ -2,7 +2,7 @@ import express from 'express'
 import 'express-async-errors'
 import logger from 'loglevel'
 import {getRoutes} from './routes'
-import config from 'config'
+
 
 
 
@@ -20,7 +20,7 @@ app.use('/api/tft/v1/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
   app.use(errorMiddleware)
 
   return new Promise((resolve) => {
-    const server = app.listen(config.get('app.server.port'), () => {
+    const server = app.listen(port, () => {
       logger.info(`Listening on port ${server.address().port}`)
       const originalClose = server.close.bind(server)
       server.close = () => {
