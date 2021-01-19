@@ -9,7 +9,8 @@
   "scripts": {
     "test": "jest --coverage",
     "start": "node .",
-    "lint": "./node_modules/.bin/eslint ../tft-match-history"
+    "lint": "eslint .",
+    "format": "prettier --write ."
   },
   "repository": {
     "type": "git",

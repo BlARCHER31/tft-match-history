@@ -1,7 +1,6 @@
 import express from 'express'
-import {getTestRoutes} from './testRoutes'
-import {getTFTRoutes} from './tftRoutes'
-
+import { getTestRoutes } from './testRoutes'
+import { getTFTRoutes } from './tftRoutes'
 
 function getRoutes() {
   const router = express.Router()
@@ -10,5 +9,4 @@ function getRoutes() {
   return router
 }
 
-
-export {getRoutes}
+export { getRoutes }

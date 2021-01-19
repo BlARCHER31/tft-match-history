@@ -1,87 +1,91 @@
 {
-    "swagger": "2.0",
-    "info": {
-        "version": "1.0.0", 
-        "title": "TFT Stats API",
-        "description": "API for summoner and match info for Team Fight Tactics.",
-        "license": {
-            "name": "MIT",
-            "url": "https://opensource.org/licenses/MIT"
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "TFT Stats API",
+    "description": "API for summoner and match info for Team Fight Tactics.",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
     }
-    },
-    "host": "localhost:8080",
-    "basePath": "/",
-    "schemes": [
-        "http"
-    ],
-    "paths": {
-        "/api/tft/v1/summoner/{summonerName}": {
-            "get":{ 
-                "summary": "Returns information about the requested summoner.",
-                "parameters": [
-                    {"in": "path",
-                    "name": "summonerName",
-                    "required": true,
-                    "type:": "string",
-                    "minimum": 1,
-                    "description": "summoner name"}
-                ], 
-                "produces":[
-                        "application/json"],
-                "responses":{
-                    "200": {
-                    "description": "Summoner Retrieved Successfully."}
-                }
-            }
-        },
-        
-        "/api/tft/v1/matches/{summonerName}": {
-            "get":{ 
-                "summary": "Returns a list of recent matches.",
-                "parameters": [
-                    
-                    {"in": "path",
-                    "name": "summonerName",
-                    "required": true,
-                    "type:": "string",
-                    "minimum": 1,
-                    "description": "summoner name"},
-
-                    {"in": "query",
-                        "name": "count",
-                        "required": true,
-                        "type:": "integer",
-                        "minimum": 1,
-                        "description": "The number of match Id's wanted"}
-                ], 
-                "produces":[
-                        "application/json"],
-                "responses":{
-                    "200": {
-                    "description": "Summoner Retrieved Successfully."}
-                }
-            }
-        },
-        
-        "/api/tft/v1/match/history/{matchId}": {
-            "get":{ 
-                "summary": "Returns the details for the requested match.",
-                "parameters": [
-                    {"in": "path",
-                    "name": "matchId",
-                    "required": true,
-                    "type:": "string",
-                    "minimum": 1,
-                    "description": "match Id"}
-                ],
-                "produces":[
-                     "application/json"],
-                "responses":{
-                    "200": {
-                    "description": "Match Information Retreived Successfully."}
-                }
-            }
+  },
+  "host": "localhost:8080",
+  "basePath": "/",
+  "schemes": ["http"],
+  "paths": {
+    "/api/tft/v1/summoner/{summonerName}": {
+      "get": {
+        "summary": "Returns information about the requested summoner.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "summonerName",
+            "required": true,
+            "type:": "string",
+            "minimum": 1,
+            "description": "summoner name"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Summoner Retrieved Successfully."
+          }
         }
+      }
+    },
+
+    "/api/tft/v1/matches/{summonerName}": {
+      "get": {
+        "summary": "Returns a list of recent matches.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "summonerName",
+            "required": true,
+            "type:": "string",
+            "minimum": 1,
+            "description": "summoner name"
+          },
+
+          {
+            "in": "query",
+            "name": "count",
+            "required": true,
+            "type:": "integer",
+            "minimum": 1,
+            "description": "The number of match Id's wanted"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Summoner Retrieved Successfully."
+          }
+        }
+      }
+    },
+
+    "/api/tft/v1/match/history/{matchId}": {
+      "get": {
+        "summary": "Returns the details for the requested match.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "matchId",
+            "required": true,
+            "type:": "string",
+            "minimum": 1,
+            "description": "match Id"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Match Information Retreived Successfully."
+          }
+        }
+      }
     }
-    
+  }
 }

@@ -8,11 +8,11 @@ function getTestRoutes() {
 }
 
 async function handleHelloRequest(req, res) {
-  res.json({'message': 'Hello Blake!!'})
+  res.json({ message: 'Hello Blake!!' })
 }
 
 async function handleGoodbyeRequest(req, res) {
-    res.json({'message': 'Goodbye Blake!'})
+  res.json({ message: 'Goodbye Blake!' })
 }
 
-export {getTestRoutes}
+export { getTestRoutes }
