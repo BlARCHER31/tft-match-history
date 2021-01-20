@@ -1,19 +1,15 @@
 import express from 'express'
 import 'express-async-errors'
 import logger from 'loglevel'
-import {getRoutes} from './routes'
+import { getRoutes } from './routes'
 
-
-
-
-function startServer({port = process.env.PORT} = {}) {
+function startServer({ port = process.env.PORT } = {}) {
   const app = express()
 
-const swaggerUi = require('swagger-ui-express')
-const swaggerDocs = require('../swagger.json')
+  const swaggerUi = require('swagger-ui-express')
+  const swaggerDocs = require('../swagger.json')
 
-app.use('/api/tft/v1/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
-  
+  app.use('/api/tft/v1/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 
   app.use('/api', getRoutes())
 
@@ -43,7 +39,9 @@ function errorMiddleware(error, req, res, next) {
     res.json({
       message: error.message,
       // we only add a `stack` property in non-production environments
-      ...(process.env.NODE_ENV === 'production' ? null : {stack: error.stack}),
+      ...(process.env.NODE_ENV === 'production'
+        ? null
+        : { stack: error.stack }),
     })
   }
 }
@@ -68,14 +66,14 @@ function setupCloseOnExit(server) {
   process.on('exit', exitHandler)
 
   // catches ctrl+c event
-  process.on('SIGINT', exitHandler.bind(null, {exit: true}))
+  process.on('SIGINT', exitHandler.bind(null, { exit: true }))
 
   // catches "kill pid" (for example: nodemon restart)
-  process.on('SIGUSR1', exitHandler.bind(null, {exit: true}))
-  process.on('SIGUSR2', exitHandler.bind(null, {exit: true}))
+  process.on('SIGUSR1', exitHandler.bind(null, { exit: true }))
+  process.on('SIGUSR2', exitHandler.bind(null, { exit: true }))
 
   // catches uncaught exceptions
-  process.on('uncaughtException', exitHandler.bind(null, {exit: true}))
+  process.on('uncaughtException', exitHandler.bind(null, { exit: true }))
 }
 
-export {startServer}
+export { startServer }

@@ -1,14 +1,13 @@
 {
-        app: {
-        server: {
-            port: 8080
-        }
+  app: {
+    server: {
+      port: 8080,
     },
-    riot: {
-        apiKey: 'MY-API-KEY',
-        baseURL: 'https://na1.api.riotgames.com',
-        matchURL: 'https://americas.api.riotgames.com',
-        championImgURL: 'http://ddragon.leagueoflegends.com/cdn/img/champion/loading/'
-    }
-    
+  },
+  riot: {
+    apiKey: 'MY-API-KEY',
+    baseURL: 'https://na1.api.riotgames.com',
+    matchURL: 'https://americas.api.riotgames.com',
+    championImgURL: 'http://ddragon.leagueoflegends.com/cdn/img/champion/loading/',
+  },
 }
