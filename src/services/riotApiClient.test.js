@@ -137,7 +137,8 @@ describe('Fetching the latest patch version', () => {
   })
 
   test('Riot API Client throws an error when the GET request fails.', async () => {
-    let result = { data : [1, 2, 3]}
+    let result = {}
+    result.data =jest.fn()
     logger.error = jest.fn()
     mockAxios.get.mockImplementation(() => {
       throw new Error('Internal Server Issue')
