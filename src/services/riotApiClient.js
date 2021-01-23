@@ -51,6 +51,7 @@ class RiotApiClient {
       response = await axios.get(
         'https://ddragon.leagueoflegends.com/api/versions.json'
       )
+      
     } catch (err) {
       logger.error(
         `An error occurred attempting to fetch the latest LOL patch version, ${err.message}`
@@ -59,6 +60,7 @@ class RiotApiClient {
     }
     const versions = response.data
     this.latestLolPatchVersion = versions[0]
+    
   }
 
   // Fetches whatever amount of most recent match id's you want

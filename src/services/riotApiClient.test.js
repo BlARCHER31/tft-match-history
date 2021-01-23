@@ -2,6 +2,7 @@ jest.mock('axios')
 import mockAxios from 'axios'
 import riotApiClient from './riotApiClient'
 import config from 'config'
+import logger from 'loglevel'
 
 describe('When fetching summoner info using summonerName, the Riot APi Client', () => {
   beforeEach(() => {
@@ -136,11 +137,14 @@ describe('Fetching the latest patch version', () => {
   })
 
   test('Riot API Client throws an error when the GET request fails.', async () => {
+    logger.error = jest.fn()
     mockAxios.get.mockImplementation(() => {
       throw new Error('Internal Server Issue')
     })
 
-    await expect(riotApiClient.fetchLatestLolPatchVersion()).rejects.toThrow()
+    await expect(
+      riotApiClient.fetchLatestLolPatchVersion()
+      ).rejects.toThrow('')
   })
 })
 
