@@ -2,7 +2,12 @@ jest.mock('axios')
 import mockAxios from 'axios'
 import riotApiClient from './riotApiClient'
 import config from 'config'
-import logger from 'loglevel'
+
+const log = require('loglevel')
+beforeAll(() => {
+  log.disableAll()
+})
+
 
 describe('When fetching summoner info using summonerName, the Riot APi Client', () => {
   beforeEach(() => {
@@ -53,14 +58,12 @@ describe('When fetching summoner info using summonerName, the Riot APi Client', 
   })
 
   test('RiotApiClient throws an error when the GET request fails.', async () => {
-    mockAxios.get.mockImplementation(() => {
-      throw new Error('Api Key Out of date.')
-    })
     const summonerName = 'Blarcher'
-
-    await expect(
-      riotApiClient.fetchTFTSummonerInfo(summonerName)
-    ).rejects.toThrow()
+    const errorMessage = 'API Key out of date'
+    mockAxios.get.mockImplementationOnce(() => Promise.reject(new Error(errorMessage)))
+    
+    await expect(riotApiClient.fetchTFTSummonerInfo(summonerName)).rejects.toThrow(errorMessage)
+   
   })
 })
 
@@ -113,15 +116,15 @@ describe('When fetching summoner info using puuid, the Riot APi Client', () => {
   })
 
   test('RiotApiClient throws an error when the GET request fails.', async () => {
-    mockAxios.get.mockImplementation(() => {
-      throw new Error('Api Key Out of date.')
-    })
-    const puuid = 12345
-
-    await expect(
-      riotApiClient.fetchTFTSummonerInfoByPuuid(puuid)
-    ).rejects.toThrow()
+    const puuid = 123456
+    const errorMessage = 'API Key out of date'
+    
+    mockAxios.get.mockImplementationOnce(() => Promise.reject(new Error(errorMessage)))
+    
+    await expect(riotApiClient.fetchTFTSummonerInfoByPuuid(puuid)).rejects.toThrow(errorMessage)
+    
   })
+
 })
 
 describe('Fetching the latest patch version', () => {
@@ -137,17 +140,19 @@ describe('Fetching the latest patch version', () => {
   })
 
   test('Riot API Client throws an error when the GET request fails.', async () => {
-    let result = {}
-    result.data =jest.fn()
-    logger.error = jest.fn()
-    mockAxios.get.mockImplementation(() => {
-      throw new Error('Internal Server Issue')
-    })
-
-    await expect(
-      riotApiClient.fetchLatestLolPatchVersion()
-      ).rejects.toThrow('')
+    expect.assertions(1)
+    
+    
+    try {
+      mockAxios.get.mockImplementation(() => {
+        throw new Error('API Key out of date.')
+      })
+      await riotApiClient.fetchLatestLolPatchVersion()
+    } catch (err) {
+      expect(err).toEqual(new Error('API Key out of date.'))
+    }
   })
+  
 })
 
 describe(`Getting a specific number of match Id's, The riot api client`, () => {
@@ -186,16 +191,15 @@ describe(`Getting a specific number of match Id's, The riot api client`, () => {
   })
 
   test('RiotApiClient throws an error when the GET request fails.', async () => {
-    mockAxios.get.mockImplementation(() => {
-      throw new Error('Api Key Out of date.')
-    })
     const puuid = 12345
     const count = 3
-
-    await expect(
-      riotApiClient.getRecentMatchesList(puuid, count)
-    ).rejects.toThrow()
+    const errorMessage = 'API Key out of date'
+    
+    mockAxios.get.mockImplementationOnce(() => Promise.reject(new Error(errorMessage)))
+    
+    await expect(riotApiClient.getRecentMatchesList(puuid, count)).rejects.toThrow(errorMessage)
   })
+
 })
 
 describe('Getting a specific matches info, the Riot Api Client', () => {
@@ -253,10 +257,10 @@ describe('Getting a specific matches info, the Riot Api Client', () => {
 
   test('The Riot Api Client throws an error when the GET request fails.', async () => {
     const matchId = 1
-    mockAxios.get.mockImplementation(() => {
-      throw new Error('Api Key Out of date.')
-    })
-
-    await expect(riotApiClient.getMatchData(matchId)).rejects.toThrow()
+    expect.assertions(1)
+    const errorMessage = 'API Key out of date'
+    mockAxios.get.mockImplementationOnce(() => Promise.reject(new Error(errorMessage)))
+    
+    await expect(riotApiClient.getMatchData(matchId)).rejects.toThrow(errorMessage)
   })
 })

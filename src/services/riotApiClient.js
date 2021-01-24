@@ -20,7 +20,7 @@ class RiotApiClient {
       return this.transformSummonerInfo(response.data)
     } catch (err) {
       logger.error(
-        `An error occurred attempting to fetch from ${response.config.url}, ${err.message}`
+        `An error occurred attempting to fetch summoner info for ${summonerName}, ${err.message}`
       )
       throw err
     }
@@ -38,7 +38,7 @@ class RiotApiClient {
       return this.transformSummonerInfo(response.data)
     } catch (err) {
       logger.error(
-        `An error occurred attempting to fetch from ${response.config.url}, ${err.message}`
+        `An error occurred attempting to fetch summoner info for the puid: ${puuid}, ${err.message}`
       )
       throw err
     }
@@ -75,7 +75,7 @@ class RiotApiClient {
       return response.data
     } catch (err) {
       logger.error(
-        `An error occurred attempting to fetch from ${response.config.url}, ${err.message}`
+        `An error occurred attempting to fetch the match list, ${err.message}`
       )
       throw err
     }
@@ -94,7 +94,7 @@ class RiotApiClient {
       return this.transformMatchInfo(response.data)
     } catch (err) {
       logger.error(
-        `An error occured attempting to fetch the Match Data from ${response.config.url}, ${err.message}`
+        `An error occured attempting to fetch the Match Data, ${err.message}`
       )
       throw err
     }
