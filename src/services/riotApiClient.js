@@ -36,6 +36,7 @@ class RiotApiClient {
         this.getHeaders({ baseURL: config.get('riot.baseURL') })
       )
       return this.transformSummonerInfo(response.data)
+      
     } catch (err) {
       logger.error(
         `An error occurred attempting to fetch summoner info for the puid: ${puuid}, ${err.message}`
@@ -46,21 +47,22 @@ class RiotApiClient {
 
   // Fetches the most up to date version of data
   async fetchLatestLolPatchVersion() {
+    
     let response
     try {
       response = await axios.get(
         'https://ddragon.leagueoflegends.com/api/versions.json'
       )
       
-    } catch (err) {
+    }catch (err) {
       logger.error(
         `An error occurred attempting to fetch the latest LOL patch version, ${err.message}`
       )
       throw err
     }
+
     const versions = response.data
     this.latestLolPatchVersion = versions[0]
-    
   }
 
   // Fetches whatever amount of most recent match id's you want
@@ -124,7 +126,7 @@ class RiotApiClient {
   }
 
   async transformMatchInfo(matchInfo) {
-    return await Promise.all(
+     return await Promise.all(
       matchInfo.info.participants.map(async (info) => {
         return {
           summoner: await this.fetchTFTSummonerInfoByPuuid(info.puuid),
@@ -150,8 +152,7 @@ class RiotApiClient {
           }),
         }
       })
-    )
-  }
+    )} 
 }
 
 export default new RiotApiClient()

@@ -73,7 +73,6 @@ describe('When fetching summoner info using puuid, the Riot APi Client', () => {
   })
 
   test('When fetching summoner info using summoner name, the Riot API Client should return a valid summoner info response.', async () => {
-    riotApiClient.latestLolPatchVersion = 1
 
     const mockedResponse = {
       data: {
@@ -116,22 +115,25 @@ describe('When fetching summoner info using puuid, the Riot APi Client', () => {
   })
 
   test('RiotApiClient throws an error when the GET request fails.', async () => {
-    const puuid = 123456
     const errorMessage = 'API Key out of date'
+    const puuid = 1234
+    const mockedResponse = {data: {
+        name: 'Blarcher',
+        summonerLevel: 100,
+        profileIconId: 26,
+        puuid: 12345,
+        id: 1,
+      },
+    }
+    mockAxios.get.mockRejectedValue(new Error(errorMessage))
     
-    mockAxios.get.mockImplementationOnce(() => Promise.reject(new Error(errorMessage)))
-    
-    await expect(riotApiClient.fetchTFTSummonerInfoByPuuid(puuid)).rejects.toThrow(errorMessage)
-    
-  })
-
+    await expect(riotApiClient.fetchTFTSummonerInfoByPuuid(puuid)).rejects.toThrow(new Error(errorMessage))
+  
+    })
 })
 
 describe('Fetching the latest patch version', () => {
-  beforeEach(() => {
-    riotApiClient.latestLolPatchVersion = 1
-  })
-
+  
   test('Returns the latest patch version', async () => {
     mockAxios.get.mockResolvedValue({ data: ['11.1.1', '10.1.2', '9.2.1'] })
 
@@ -142,17 +144,14 @@ describe('Fetching the latest patch version', () => {
   test('Riot API Client throws an error when the GET request fails.', async () => {
     expect.assertions(1)
     
-    
-    try {
-      mockAxios.get.mockImplementation(() => {
-        throw new Error('API Key out of date.')
-      })
-      await riotApiClient.fetchLatestLolPatchVersion()
-    } catch (err) {
-      expect(err).toEqual(new Error('API Key out of date.'))
-    }
-  })
+    const errorMessage = "API Key out of date."
+    mockAxios.get.mockImplementation(() => {
+      throw new Error(errorMessage)
+    })
+      
+     await expect(riotApiClient.fetchLatestLolPatchVersion()).rejects.toThrow(new Error(errorMessage))
   
+  })
 })
 
 describe(`Getting a specific number of match Id's, The riot api client`, () => {
