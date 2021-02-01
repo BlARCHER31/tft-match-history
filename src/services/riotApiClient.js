@@ -3,10 +3,9 @@ import config from 'config'
 import axios from 'axios'
 
 class RiotApiClient {
-  constructor() {
-    this.fetchLatestLolPatchVersion()
-  }
 
+
+  
   //Fetches info for the summoner using the Summoner's Name
   async fetchTFTSummonerInfo(summonerName) {
     const url = `/tft/summoner/v1/summoners/by-name/${summonerName}`
@@ -47,7 +46,6 @@ class RiotApiClient {
 
   // Fetches the most up to date version of data
   async fetchLatestLolPatchVersion() {
-    
     let response
     try {
       response = await axios.get(
@@ -62,8 +60,9 @@ class RiotApiClient {
     }
 
     const versions = response.data
-    this.latestLolPatchVersion = versions[0]
-  }
+    return versions[0]
+  }  
+
 
   // Fetches whatever amount of most recent match id's you want
   async getRecentMatchesList(puuid, count) {
@@ -102,9 +101,22 @@ class RiotApiClient {
     }
   }
 
+  async initialize(){
+    try 
+    {
+      const latestPatchVersion = await this.fetchLatestLolPatchVersion()
+      return this.latestPatchVersion = latestPatchVersion
+    } catch (err) {
+    logger.error(
+      `An error occored attempting to fetch the latest patch version. ${err.message}`
+    )  
+    throw err
+    }
+  }
+
   transformSummonerInfo(summonerInfo) {
     const iconID = summonerInfo.profileIconId
-    const url = `http://ddragon.leagueoflegends.com/cdn/${this.latestLolPatchVersion}/img/profileicon/${iconID}.png`
+    const url = `http://ddragon.leagueoflegends.com/cdn/${this.latestPatchVersion}/img/profileicon/${iconID}.png`
     return {
       summonerName: summonerInfo.name,
       level: summonerInfo.summonerLevel,
