@@ -98,7 +98,7 @@ class RiotApiClient {
   async initialize() {
     try {
       const latestPatchVersion = await this.fetchLatestLolPatchVersion()
-      return (this.latestPatchVersion = latestPatchVersion)
+      this.latestPatchVersion = latestPatchVersion
     } catch (err) {
       logger.error(
         `An error occored attempting to fetch the latest patch version. ${err.message}`

@@ -1,12 +1,11 @@
 jest.mock('axios')
+import logger from 'loglevel'
 import mockAxios from 'axios'
 import riotApiClient from './riotApiClient'
 import config from 'config'
 
 const log = require('loglevel')
-beforeAll(() => {
-  log.disableAll()
-})
+
 
 describe('When fetching summoner info using summonerName, the Riot APi Client', () => {
   beforeEach(() => {
@@ -55,6 +54,7 @@ describe('When fetching summoner info using summonerName, the Riot APi Client', 
   })
 
   test('RiotApiClient throws an error when the GET request fails.', async () => {
+    log.disableAll()
     const summonerName = 'Blarcher'
     const errorMessage = 'API Key out of date'
     mockAxios.get.mockImplementationOnce(() =>
@@ -114,6 +114,7 @@ describe('When fetching summoner info using puuid, the Riot APi Client', () => {
   })
 
   test('RiotApiClient throws an error when the GET request fails.', async () => {
+    log.disableAll()
     const errorMessage = 'API Key out of date'
     const puuid = 1234
     mockAxios.get.mockRejectedValue(new Error(errorMessage))
@@ -132,6 +133,7 @@ describe('Fetching the latest patch version', () => {
   })
 
   test('Riot API Client throws an error when the GET request fails.', async () => {
+    log.disableAll()
     expect.assertions(1)
 
     const errorMessage = 'API Key out of date.'
@@ -181,6 +183,7 @@ describe(`Getting a specific number of match Id's, The riot api client`, () => {
   })
 
   test('RiotApiClient throws an error when the GET request fails.', async () => {
+    log.disableAll()
     const puuid = 12345
     const count = 3
     const errorMessage = 'API Key out of date'
@@ -249,6 +252,7 @@ describe('Getting a specific matches info, the Riot Api Client', () => {
   })
 
   test('The Riot Api Client throws an error when the GET request fails.', async () => {
+    log.disableAll()
     const matchId = 1
     expect.assertions(1)
     const errorMessage = 'API Key out of date'
@@ -263,13 +267,17 @@ describe('Getting a specific matches info, the Riot Api Client', () => {
 })
 
 describe('Retrieving the patch version JSON and return the latest.', () => {
+  
   test('Retrieves and returns the lates Lol Patch Version', async () => {
     const mockedResponse = '11.1.1'
     mockAxios.get.mockResolvedValue({ data: ['11.1.1', '10.1.2', '9.2.1'] })
-    expect(await riotApiClient.initialize()).toEqual(mockedResponse)
+    
+    await riotApiClient.initialize()
+    expect(riotApiClient.latestPatchVersion).toEqual(mockedResponse)
   })
 
   test('The Riot Api Client throws an error when the GET request fails.', async () => {
+    log.disableAll()
     expect.assertions(1)
     const errorMessage = 'API Key out of date'
 

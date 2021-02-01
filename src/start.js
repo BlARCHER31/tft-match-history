@@ -2,7 +2,7 @@ import express from 'express'
 import 'express-async-errors'
 import logger from 'loglevel'
 import { getRoutes } from './routes'
-import riotApiClient from './services/riotApiClient'
+
 
 function startServer({ port = process.env.PORT } = {}) {
   const app = express()
@@ -16,15 +16,10 @@ function startServer({ port = process.env.PORT } = {}) {
 
   app.use(errorMiddleware)
 
-  async function initilizeLatestPatch() {
-    const latest = await riotApiClient.initialize()
-    return latest
-  }
 
   return new Promise((resolve) => {
     const server = app.listen(port, () => {
       logger.info(`Listening on port ${server.address().port}`)
-      initilizeLatestPatch()
       const originalClose = server.close.bind(server)
       server.close = () => {
         return new Promise((resolveClose) => {
