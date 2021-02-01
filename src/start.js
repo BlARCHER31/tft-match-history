@@ -19,13 +19,10 @@ function startServer({ port = process.env.PORT } = {}) {
   async function initilizeLatestPatch() {
     const latest = await riotApiClient.initialize()
     return latest
-
   }
-  
 
-  
   return new Promise((resolve) => {
-    const server =  app.listen(port, () => {
+    const server = app.listen(port, () => {
       logger.info(`Listening on port ${server.address().port}`)
       initilizeLatestPatch()
       const originalClose = server.close.bind(server)

@@ -3,9 +3,6 @@ import config from 'config'
 import axios from 'axios'
 
 class RiotApiClient {
-
-
-  
   //Fetches info for the summoner using the Summoner's Name
   async fetchTFTSummonerInfo(summonerName) {
     const url = `/tft/summoner/v1/summoners/by-name/${summonerName}`
@@ -35,7 +32,6 @@ class RiotApiClient {
         this.getHeaders({ baseURL: config.get('riot.baseURL') })
       )
       return this.transformSummonerInfo(response.data)
-      
     } catch (err) {
       logger.error(
         `An error occurred attempting to fetch summoner info for the puid: ${puuid}, ${err.message}`
@@ -51,8 +47,7 @@ class RiotApiClient {
       response = await axios.get(
         'https://ddragon.leagueoflegends.com/api/versions.json'
       )
-      
-    }catch (err) {
+    } catch (err) {
       logger.error(
         `An error occurred attempting to fetch the latest LOL patch version, ${err.message}`
       )
@@ -61,8 +56,7 @@ class RiotApiClient {
 
     const versions = response.data
     return versions[0]
-  }  
-
+  }
 
   // Fetches whatever amount of most recent match id's you want
   async getRecentMatchesList(puuid, count) {
@@ -101,16 +95,15 @@ class RiotApiClient {
     }
   }
 
-  async initialize(){
-    try 
-    {
+  async initialize() {
+    try {
       const latestPatchVersion = await this.fetchLatestLolPatchVersion()
-      return this.latestPatchVersion = latestPatchVersion
+      return (this.latestPatchVersion = latestPatchVersion)
     } catch (err) {
-    logger.error(
-      `An error occored attempting to fetch the latest patch version. ${err.message}`
-    )  
-    throw err
+      logger.error(
+        `An error occored attempting to fetch the latest patch version. ${err.message}`
+      )
+      throw err
     }
   }
 
@@ -138,7 +131,7 @@ class RiotApiClient {
   }
 
   async transformMatchInfo(matchInfo) {
-     return await Promise.all(
+    return await Promise.all(
       matchInfo.info.participants.map(async (info) => {
         return {
           summoner: await this.fetchTFTSummonerInfoByPuuid(info.puuid),
@@ -164,7 +157,8 @@ class RiotApiClient {
           }),
         }
       })
-    )} 
+    )
+  }
 }
 
 export default new RiotApiClient()

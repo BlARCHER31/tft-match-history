@@ -1,4 +1,3 @@
-
 jest.mock('../services/riotApiClient')
 import mockRiotApiClient from '../services/riotApiClient'
 import {
@@ -115,8 +114,6 @@ describe('When fetching a match list from the riotApiClient, the tft route handl
   })
 
   test('Sends an error to the caller when the riotApiClient caLL fails.', async () => {
-    
-    
     req.params.summonerName = 'Blarcher'
 
     mockRiotApiClient.fetchTFTSummonerInfo.mockImplementation(() => {
