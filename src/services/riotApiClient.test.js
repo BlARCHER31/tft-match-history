@@ -1,5 +1,4 @@
 jest.mock('axios')
-import logger from 'loglevel'
 import mockAxios from 'axios'
 import riotApiClient from './riotApiClient'
 import config from 'config'
