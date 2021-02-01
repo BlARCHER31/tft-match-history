@@ -3,6 +3,7 @@ import 'express-async-errors'
 import logger from 'loglevel'
 import { getRoutes } from './routes'
 
+
 function startServer({ port = process.env.PORT } = {}) {
   const app = express()
 
@@ -14,6 +15,7 @@ function startServer({ port = process.env.PORT } = {}) {
   app.use('/api', getRoutes())
 
   app.use(errorMiddleware)
+
 
   return new Promise((resolve) => {
     const server = app.listen(port, () => {

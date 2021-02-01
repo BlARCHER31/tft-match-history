@@ -3,10 +3,6 @@ import config from 'config'
 import axios from 'axios'
 
 class RiotApiClient {
-  constructor() {
-    this.fetchLatestLolPatchVersion()
-  }
-
   //Fetches info for the summoner using the Summoner's Name
   async fetchTFTSummonerInfo(summonerName) {
     const url = `/tft/summoner/v1/summoners/by-name/${summonerName}`
@@ -20,7 +16,7 @@ class RiotApiClient {
       return this.transformSummonerInfo(response.data)
     } catch (err) {
       logger.error(
-        `An error occurred attempting to fetch from ${response.config.url}, ${err.message}`
+        `An error occurred attempting to fetch summoner info for ${summonerName}, ${err.message}`
       )
       throw err
     }
@@ -38,7 +34,7 @@ class RiotApiClient {
       return this.transformSummonerInfo(response.data)
     } catch (err) {
       logger.error(
-        `An error occurred attempting to fetch from ${response.config.url}, ${err.message}`
+        `An error occurred attempting to fetch summoner info for the puid: ${puuid}, ${err.message}`
       )
       throw err
     }
@@ -57,8 +53,9 @@ class RiotApiClient {
       )
       throw err
     }
+
     const versions = response.data
-    this.latestLolPatchVersion = versions[0]
+    return versions[0]
   }
 
   // Fetches whatever amount of most recent match id's you want
@@ -73,7 +70,7 @@ class RiotApiClient {
       return response.data
     } catch (err) {
       logger.error(
-        `An error occurred attempting to fetch from ${response.config.url}, ${err.message}`
+        `An error occurred attempting to fetch the match list, ${err.message}`
       )
       throw err
     }
@@ -92,7 +89,19 @@ class RiotApiClient {
       return this.transformMatchInfo(response.data)
     } catch (err) {
       logger.error(
-        `An error occured attempting to fetch the Match Data from ${response.config.url}, ${err.message}`
+        `An error occured attempting to fetch the Match Data, ${err.message}`
+      )
+      throw err
+    }
+  }
+
+  async initialize() {
+    try {
+      const latestPatchVersion = await this.fetchLatestLolPatchVersion()
+      this.latestPatchVersion = latestPatchVersion
+    } catch (err) {
+      logger.error(
+        `An error occored attempting to fetch the latest patch version. ${err.message}`
       )
       throw err
     }
@@ -100,7 +109,7 @@ class RiotApiClient {
 
   transformSummonerInfo(summonerInfo) {
     const iconID = summonerInfo.profileIconId
-    const url = `http://ddragon.leagueoflegends.com/cdn/${this.latestLolPatchVersion}/img/profileicon/${iconID}.png`
+    const url = `http://ddragon.leagueoflegends.com/cdn/${this.latestPatchVersion}/img/profileicon/${iconID}.png`
     return {
       summonerName: summonerInfo.name,
       level: summonerInfo.summonerLevel,
