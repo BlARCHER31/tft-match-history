@@ -1,6 +1,11 @@
 # TFT-Match-History
 
-A backend service that allows you to get various match and summoner statistics for TeamFightTactics.
+A backend service that allows you to get various match and summoner statistics for TeamFight Tactics.
+
+## What is TeamFight Tactics?
+
+* TeamFight Tactics is a strategy game developed by Riot Games.
+    * https://teamfighttactics.leagueoflegends.com/en-us/
 
 ## Purpose of the Project
 
