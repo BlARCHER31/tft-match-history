@@ -1,4 +1,4 @@
-# TFT-Match-History
+# TFT Match History
 
 A backend service that allows you to get various match and summoner statistics for TeamFight Tactics.
 
