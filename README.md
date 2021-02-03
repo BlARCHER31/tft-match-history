@@ -1,8 +1,8 @@
-# TFT Match History
+# __TFT Match History__
 
 A backend service that allows you to get various match and summoner statistics for TeamFight Tactics.
 
-## What is TeamFight Tactics?
+## __What is TeamFight Tactics?__
 
 ![Logo of TFT](/images/logo-hero.png)
 
@@ -10,13 +10,53 @@ TeamFight Tactics is a strategy game developed by Riot Games. In Teamfight Tacti
 
 Each round is against one other player and their champions. If you win a round against another player, you’ll do damage to their health. The amount of damage you do depends on how many of your champions are still alive. To win the game you must be the last person left with health.
     
-    https://teamfighttactics.leagueoflegends.com/en-us/
+    https|//teamfighttactics.leagueoflegends.com/en-us/
 
-## Purpose of the Project
+## __Purpose of the Project__
 
-The purpose of this project is to be able to showcase the level of knowledge for the various languages and tech stacks I have learned. 
+The purpose of this project is to be able to showcase the level of knowledge for the various languages and tech stacks I have learned. This backend service allows anyone to type in their 'summoner name' and retrieve different statistics on themselves. From the information you receive you can also look up specific match information that is provided via the RIOT API. 
 
-## Tech Stack
+### __Riot API__
+
+The Riot API allows developers to access the vast depth of data stored from Riot Games. An API Key is required from a developer account that is free to sign up for. Riot gives you so much data to work with. My job was not only to give an easy way to access the API, but to also return only the important information.  
+</br>
+
+### __Data Returned__ 
+</br>
+
+__Summoner Info__ </br>
+Returns information about a specific summoner.
+
+Name | Description
+-----|------------
+summonerName | Summoner name.
+level | Summoner level associated with the summoner.
+profileIconUrl | A URL that leads to the picture of the profile Icon.
+puuid | Encrypted PUUID. Exact length of 78 characters. It is used to access match information, and can also be used to look up other summoners.
+</br>
+
+__Match List__ </br>
+Returns an array of match id's used to get a specific match's info.
+
+Name | Description
+-----|------------
+matchId | Id of a specific match.
+</br>
+
+__Match Info__ </br>
+Returns information about a specific match, using a match ID.
+
+Name | Description
+-----|------------
+summoner | Summoner name.
+placement | The placement of the summoner.
+level | Summoner level associated with the summoner.
+playersEliminated | The number of players the summoner eliminated.
+totalDamage | Total damage done to other players.
+champions | Array of champion info.
+</br>
+
+## __Tech Stack__
 
 * JavaScript
 * Node/js
@@ -27,13 +67,13 @@ The purpose of this project is to be able to showcase the level of knowledge for
 * Prettier
 * EsLint
 
-## Code
+## __Code__
 
-### Modules
+### __Modules__
 
 The code was separated into different modules to make for readability, and efficiency. As a developer, I want to make it as easy as possible for anyone else who is using this or future projects to be able to read and understand the project. Separating the code into simple modules allowed me to do that. It also allowed me to create capable and productive code.
 
-### Testing
+### __Testing__
 
 This project allowed me to do a ton of learning as I went through it. I wrote the code first and then followed by learning Jest for the unit tests.
 Unit tests were written for all necessary functions using Jest.
@@ -42,7 +82,7 @@ For the tests to properly go through the code and test correctly, I had to write
     * Both modules with testing have over 85% coverage.
     * The coverage report can be accessed via /coverage/lcov-report/index.html
 
-### Github Actions
+### __Github Actions__
 
 Github actions were added to the project to run anytime a branch is pushed, or a Pull Request is put up. The action is mainly responsible for making sure that nothing code breaking was added to the project. It also runs Lint and Prettier to make sure that everything is up to par.
 * The action runs:
@@ -50,10 +90,10 @@ Github actions were added to the project to run anytime a branch is pushed, or a
     * Lint
     * Prettier
 
-### EsLint
+### __EsLint__
 
 EsLint was added to analyze the code and quickly fix issues. EsLint made for easy analyzing, picking up unused variables and small mistakes throughout the project.
 
-### Prettier
+### __Prettier__
 
 Prettier is used to go through and format the code automatically. Prettier was a very nice addition to the project because it allowed me to give a uniform presentation to small things that I may have previously missed.
