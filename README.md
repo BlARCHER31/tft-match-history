@@ -69,10 +69,10 @@ champions | Array of champion info.
 * ![Express logo](/images/readme/express-log.png) [Express](https://expressjs.com/)
 <br/>
 
-* ![Swagger logo](/images/readme/swagger-ui-logo.png) [Swagger](https://swagger.io/)
+* ![Axios logo](/images/readme/axios-logo.png) [Axios](https://www.npmjs.com/package/axios)
 <br/>
 
-* ![Axios logo](/images/readme/axios.png) [Axios](https://www.npmjs.com/package/axios)
+* ![Swagger logo](/images/readme/swagger-ui-logo.png) [Swagger](https://swagger.io/)
 <br/>
 
 * ![Jest logo](/images/readme/jestjs-logo.png) [Jest](https://jestjs.io/)
