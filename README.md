@@ -4,13 +4,12 @@ A backend service that allows you to get various match and summoner statistics f
 
 ## __What is TeamFight Tactics?__
 
-![Logo of TFT](/images/logo-hero.png)
+![Logo of TFT](/images/readme/logo-hero.png)
 
-TeamFight Tactics is a strategy game developed by Riot Games. In Teamfight Tactics, you’re going up against seven other players who are all assembling a team of champions across multiple rounds. It is considered an 'autobattler' game, because instead of controlling the champions, they fight automatically. The placement and type of champions you have on the board is part of the strategy and key to winning each round.
+[TeamFight Tactics](https://teamfighttactics.leagueoflegends.com/en-us/) is a strategy game developed by Riot Games. In Teamfight Tactics, you’re going up against seven other players who are all assembling a team of champions across multiple rounds. It is considered an 'autobattler' game, because instead of controlling the champions, they fight automatically. The placement and type of champions you have on the board is part of the strategy and key to winning each round.
 
 Each round is against one other player and their champions. If you win a round against another player, you’ll do damage to their health. The amount of damage you do depends on how many of your champions are still alive. To win the game you must be the last person left with health.
-    
-    https|//teamfighttactics.leagueoflegends.com/en-us/
+
 
 ## __Purpose of the Project__
 
@@ -58,14 +57,15 @@ champions | Array of champion info.
 
 ## __Tech Stack__
 
-* JavaScript
-* Node/js
-* Express
-* Swagger
-* Axios
-* Jest
-* Prettier
-* EsLint
+* <src="/images/readme/JavaScript-logo.png" alt="JavaScript logo" width="10" height="10"> [JavaScript](https://www.javascript.com/)
+* [Nodejs](https://nodejs.dev/)
+* [Nodemon](https://nodemon.io/)
+* [Express](https://expressjs.com/)
+* [Swagger](https://swagger.io/)
+* [Axios](https://www.npmjs.com/package/axios)
+* [Jest](https://jestjs.io/)
+* [Prettier](https://prettier.io/)
+* [EsLint](https://eslint.org/)
 
 ## __Code__
 
