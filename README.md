@@ -57,15 +57,32 @@ champions | Array of champion info.
 
 ## __Tech Stack__
 
-* <src="/images/readme/JavaScript-logo.png" alt="JavaScript logo" width="10" height="10"> [JavaScript](https://www.javascript.com/)
-* [Nodejs](https://nodejs.dev/)
-* [Nodemon](https://nodemon.io/)
-* [Express](https://expressjs.com/)
-* [Swagger](https://swagger.io/)
-* [Axios](https://www.npmjs.com/package/axios)
-* [Jest](https://jestjs.io/)
-* [Prettier](https://prettier.io/)
-* [EsLint](https://eslint.org/)
+* ![JavaScript logo](/images/readme/JavaScript-logo.png) [JavaScript](https://www.javascript.com/)
+<br/>
+
+* ![NodeJs logo](/images/readme/nodejs.png) [Nodejs](https://nodejs.dev/)
+<br/>
+
+* ![Nodemon logo](/images/readme/nodemon.png) [Nodemon](https://nodemon.io/)
+<br/>
+
+* ![Express logo](/images/readme/express-log.png) [Express](https://expressjs.com/)
+<br/>
+
+* ![Swagger logo](/images/readme/swagger-ui-logo.png) [Swagger](https://swagger.io/)
+<br/>
+
+* ![Axios logo](/images/readme/axios.png) [Axios](https://www.npmjs.com/package/axios)
+<br/>
+
+* ![Jest logo](/images/readme/jestjs-logo.png) [Jest](https://jestjs.io/)
+<br/>
+
+* ![Prettier logo](/images/readme/Prettier-logo.png)[Prettier](https://prettier.io/)
+<br/>
+
+* ![EsLint logo](/images/readme/eslint-logo.png)[EsLint](https://eslint.org/)
+<br/>
 
 ## __Code__
 
