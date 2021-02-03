@@ -4,6 +4,8 @@ A backend service that allows you to get various match and summoner statistics f
 
 ## What is TeamFight Tactics?
 
+![Logo of TFT](/images/logo-hero.png)
+
 TeamFight Tactics is a strategy game developed by Riot Games. In Teamfight Tactics, you’re going up against seven other players who are all assembling a team of champions across multiple rounds. It is considered an 'autobattler' game, because instead of controlling the champions, they fight automatically. The placement and type of champions you have on the board is part of the strategy and key to winning each round.
 
 Each round is against one other player and their champions. If you win a round against another player, you’ll do damage to their health. The amount of damage you do depends on how many of your champions are still alive. To win the game you must be the last person left with health.
