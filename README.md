@@ -1,5 +1,5 @@
 # __TFT Match History__
-
+![Node.js CI](https://github.com/BLARCHER31/tft-match-history/workflows/Node.js%20CI/badge.svg) <br>
 A backend service that allows you to get various match and summoner statistics for TeamFight Tactics.
 
 ## __What is TeamFight Tactics?__
@@ -14,6 +14,18 @@ Each round is against one other player and their champions. If you win a round a
 ## __Purpose of the Project__
 
 The purpose of this project is to be able to showcase the level of knowledge for the various languages and tech stacks I have learned. This backend service allows anyone to type in their 'summoner name' and retrieve different statistics on themselves. From the information you receive you can also look up specific match information that is provided via the RIOT API. 
+
+### __Things I learned throughout__
+
+Before I began this project I had a very good fundamental understanding of _JavaScript_. I had the opportunity to learn so much more by going over new concepts time and time again. _Exceptions/error handling_ was a concept that I was ok with in the beginning, but after taking an in depth dive into _debugging_ and _testing_, I became much more comfortable with it. </br>
+
+Writing _unit tests_ for the project allowed me to be able to grasp so much more. It gave me a better understanding of _Promises_ and the importance of _Async/Await_. I enjoyed writing tests because of how much it helped fill in some blanks that I had before.</br>
+
+The concepts of _logging_ and _configuration_ came fairly easy. After spending so much time of going through documentation after documentation, I was able to grasp how to configure different packages and the project itself. I learned the importance of not hard coding things and keeping certain things in the configuration file. Logging is always nice to make sure things are working as advertised and also very important to identify a problem when something breaks. </br>
+
+__HTTP/JSON__
+</br>
+Learning and grasping _HTTP_ and _JSON_ was key to the project. Making _GET_ requests was the one of the first and most important things I learned. The information that I got back and also send is in _JSON_. So obviously another extremely important concept that I learned.
 
 ### __Riot API__
 
