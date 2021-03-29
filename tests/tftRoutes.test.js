@@ -1,10 +1,10 @@
-jest.mock('../services/riotApiClient')
-import mockRiotApiClient from '../services/riotApiClient'
+jest.mock('../src/services/riotApiClient')
+import mockRiotApiClient from '../src/services/riotApiClient'
 import {
   handleGetSummonerInfo,
   handleGetMatchDetail,
   handleGetMatchesForSummoner,
-} from './tftRoutes'
+} from '../src/routes/tftRoutes'
 
 describe('When fetching summoner info from the riotApiClient, the tft route handler', () => {
   let req = {}
