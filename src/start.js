@@ -2,10 +2,12 @@ import express from 'express'
 import 'express-async-errors'
 import logger from 'loglevel'
 import { getRoutes } from './routes'
+import cors from 'cors'
 
 
 function startServer({ port = process.env.PORT } = {}) {
   const app = express()
+  app.use(cors())
 
   const swaggerUi = require('swagger-ui-express')
   const swaggerDocs = require('../swagger.json')

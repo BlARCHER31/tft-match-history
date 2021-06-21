@@ -5,7 +5,7 @@
     },
   },
   riot: {
-    apiKey: 'RGAPI-5bf6e704-2d2b-4fea-a103-1b850c02d162',
+    apiKey: 'RGAPI-17d69b9b-10d5-4f44-b78a-a7156c8304fc',
     baseURL: 'https://na1.api.riotgames.com',
     matchURL: 'https://americas.api.riotgames.com',
     championImgURL: 'http://ddragon.leagueoflegends.com/cdn/img/champion/loading/',
